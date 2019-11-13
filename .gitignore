@@ -1,3 +1,7 @@
 .idea/*
 */*.pyc
 __pycache__/
+*.IAB
+*.I*D
+algorithms_*
+.idea
