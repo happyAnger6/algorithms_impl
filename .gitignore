@@ -5,3 +5,4 @@ __pycache__/
 *.I*D
 algorithms_*
 .idea
+*.out
