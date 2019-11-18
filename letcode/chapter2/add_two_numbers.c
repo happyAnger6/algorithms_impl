@@ -38,5 +38,7 @@ link add_two_numbers(link h1, link h2)
 	}
 
 	if(carry)	cur->next = new_node(carry);
-	return head->next;
+	link ret = head->next;
+	free(head);
+	return ret;
 }
