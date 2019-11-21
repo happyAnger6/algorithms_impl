@@ -3,6 +3,5 @@
 __pycache__/
 *.IAB
 *.I*D
-algorithms_*
 .idea
 *.out
