@@ -14,7 +14,7 @@ void initNodes(int);
 void newNode(itemType);
 void freeNode(link);
 void insertNext(link, link);
-void deleteNext(link);
+link deleteNext(link);
 link Next(link);
 int Item(link);
 #endif
