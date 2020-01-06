@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+#define MAX_ELEMENTS 100
 
 typedef struct{
     int data[MAX_ELEMENTS];
@@ -49,7 +52,7 @@ int main(int argc, char *argv[])
     char *s = argv[1];
     char c;
     int res, d;
-    int sign = 1;
+    char sign = '+';
 
     int i = 0;
     int len = strlen(s);
@@ -63,16 +66,17 @@ int main(int argc, char *argv[])
         {
             d = d*10 + c - '0';
         } 
-        else
+       
+        if((c<'0'&&c!=' ')||(i==len-1))
         {
             if(sign=='-')
-              stack_push(-d);
+              stack_push(stack, -d);
             if(sign=='+') 
-              stack_push(d);
+              stack_push(stack, d);
             if(sign == '*' || sign == '/')
             {
                 int tmp = sign == '*'? stack_pop(stack) * d : stack_pop(stack)/d;
-                stack.push(tmp);
+                stack_push(stack, tmp);
             }
             sign = c;
             d = 0;
