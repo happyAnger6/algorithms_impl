@@ -67,36 +67,35 @@ int main(int argc, char *argv[])
             d = d*10 + c - '0';
         } 
     
-        if(c == ' ' || c == ')')
+        if(c == ' ')
          continue;
+
+        if(c == ')')
+        {
+            if(sign == '+' || sign == '-')
+            {
+                sign == '+'? stack_push(stack, d) : stack_push(stack, -d); 
+            } 
+        }
 
         if(c=='(')
         {
-            if(sign == '*')
-                stack_push('*')
-
-            if(sign == '/')
-                stack_push('*')
-
-            if(sign == '+')
-               stack_push(d);
-
-            if(sign == '-')
-               stack_push(-d);
-        
+            stack_push(sign);
             sign = '+';
             d = 0;
         }
         else // if c is "+-*/"
         {
+            int tmp = 0;
             if(sign == '*')
             {
-                int tmp = stack_pop(stack);
+                tmp = stack_pop(stack);
                 stack_push(tmp*d); 
             }
+
             if(sign == '/')
             {
-                int tmp = stack_pop(stack);
+                tmp = stack_pop(stack);
                 stack_push(tmp/d); 
             }
 
@@ -112,7 +111,17 @@ int main(int argc, char *argv[])
     }
 
     while(!stack_empty(stack))
-        res += stack_pop(stack);
+    {
+        s = stack_pop(stack);
+        if(s==sign)
+        {
+            res = res*sign*stack_pop(stack); 
+        } 
+        else
+        {
+            res+=stack_pop(stack); 
+        }
+    }
 
     printf("[%d]\r\n", res);
 }
