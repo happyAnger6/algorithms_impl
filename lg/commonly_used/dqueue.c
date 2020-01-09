@@ -13,7 +13,7 @@ typedef struct dqueue_{
     dnode dq;
 }dqueue, *pDqueue;
 
-void dqueue_init();
+void dqueue_init(pDqueue dq);
 int dqueue_add_head(pDqueue dq, int data);
 int dqueue_add_tail(pDqueue dq, int data);
 int dqueue_del_head(pDqueue dq);
@@ -54,12 +54,17 @@ int main(int argc, char *argv[])
     k = atoi(argv[1]);
     n = argc-2;
     int *pNums = malloc(sizeof(int) * n);
+    int *pResults = malloc(sizeof(int) * (n-2));
     for(i = 2; i < argc; i++)
         pNums[i-2] = atoi(argv[i]);
 
     for(i = 0; i < n; i++)
     {
         if(i==0)
+        {
             init_dqueue(pNums, k); 
+            i+=k;
+        }
+        pResults[i-k]=dqueue_head();
     }
 }
