@@ -24,6 +24,19 @@ void pre_reverse(tnode *root)
     pre_reverse(root->right); 
 }
 
+
+void pre_reverse_no_recursive1(tnode *root)
+{
+	stack_push(root);
+	while(NULL != (cur = stack_pop()))
+	{
+		if(cur->right)
+			stack_push(cur->right);
+		if(cur->left)
+			stack_push(cur->left);
+	}
+}
+
 void pre_reverse_no_recursive(tnode *root)
 {
 	tnode *cur = root;
