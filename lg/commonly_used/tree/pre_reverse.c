@@ -16,11 +16,42 @@ void traverse(tnode *node)
 
 void pre_reverse(tnode *root)
 {
-    while(NULL != root)
-        traverse(root);
-
+    if(NULL == root)
+		return;
+    
+	traverse(root);
     pre_reverse(root->left); 
     pre_reverse(root->right); 
+}
+
+void pre_reverse_no_recursive(tnode *root)
+{
+	tnode *cur = root;
+	while(cur != NULL)
+	{
+		if(cur->left && cur->right)
+		{
+			stack_push(cur);
+			cur = cur->left;
+		}
+		else if(cur->left)
+		{
+			cur = cur->left;
+		}
+		else if(cur->right)
+		{
+			cur = cur->right;
+		}
+		else
+		{
+			top = stack_pop();
+			if(top == NULL)
+				break;
+			cur = top->right;
+		}
+	}	
+
+	return;
 }
 
 int main(int argc, char *argv[])
