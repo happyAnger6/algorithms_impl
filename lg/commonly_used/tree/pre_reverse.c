@@ -30,6 +30,7 @@ void pre_reverse_no_recursive1(tnode *root)
 	stack_push(root);
 	while(NULL != (cur = stack_pop()))
 	{
+        traverse(cur);
 		if(cur->right)
 			stack_push(cur->right);
 		if(cur->left)
