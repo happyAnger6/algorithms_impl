@@ -5,7 +5,7 @@ def dp_longest_palindromic_substr(s):
     start, slen = 0, 1
     for i in range(n):
         for j in range(i):
-            dp[j][i] = s[i] == s[j] and (dp[j+1][i-1]) or i - j < 2
+            dp[j][i] = (s[i] == s[j] and (dp[j+1][i-1]) or i - j < 2)
             if dp[j][i]:
                 if i - j + 1 > slen:
                     slen = i - j + 1
