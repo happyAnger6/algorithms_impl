@@ -24,16 +24,41 @@ class Graph:
                     seen.add(c)
                     q.append(c)
 
-    def bfs(self):
+    def bfs(self, f=None):
         print('------bfs------')
         from collections import deque
         q = deque()
         q.append(self.nodes[0])
         seen = set()
         seen.add(self.nodes[0])
+        def dfs_color(n, color=None):
+            def draw_node(n, draw_color):
+                if n.color is None:
+                    n.color = draw_color
+                else:
+                    if n.color != draw_color:
+                        return None
+
+                if n.color == 0:
+                    return 1
+                else:
+                    return 0
+
+            if color is None:
+                next_color = draw_node(n, 1)
+            else:
+                next_color = draw_node(n, color)
+
+            if next_color is None:
+                return False
+
+            if not n.adjacent:
+                return True
+            return dfs_color(n.adjacent[0], next_color)
+
         while q:
             n = q.popleft()
-            n.prt()
+            f(n)
             for c in n.adjacent:
                 if c not in seen:
                     seen.add(c)
@@ -60,6 +85,10 @@ class Node:
     def __init__(self, n):
         self.data = n
         self.adjacent = set()
+        self.color = None
+
+    def set_color(self, color):
+        self.color = color
 
     def add_edge(self, node):
         self.adjacent.add(node)
@@ -81,6 +110,6 @@ if __name__ == "__main__":
     g.add_edge(4, 2)
     g.add_edge(3, 2)
     g.prt()
-    g.bfs()
+    g.bfs(lambda x: x.prt())
     g.dfs()
 
